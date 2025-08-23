@@ -1,0 +1,80 @@
+columns:
+  - _id : category
+  - company_name : category
+  - Company Status : category
+  - year : int                         
+  - Current assets : float
+  - Cost of goods sold : float
+  - Depreciation and amortization : float
+  - EBDITDA : float
+  - Inventory : float
+  - Net Income : float
+  - Total Receivable : float
+  - Market Value : float
+  - Net Sales : float
+  - Total Assets : float
+  - Total Long-term Debt : float
+  - EBIT : float
+  - Gross Profit : float
+  - Total Current Liabilitie : float
+  - Retained Earnings : float
+  - Total Revenue : float
+  - Total Liabilities : float
+  - Total Operating Expenses : float     
+
+
+numerical_columns:
+  - year                       
+  - Current assets 
+  - Cost of goods sold 
+  - Depreciation and amortization 
+  - EBDITDA 
+  - Inventory 
+  - Net Income 
+  - Total Receivable 
+  - Market Value 
+  - Net Sales 
+  - Total Assets 
+  - Total Long-term Debt 
+  - EBIT 
+  - Gross Profit 
+  - Total Current Liabilitie 
+  - Retained Earnings 
+  - Total Revenue 
+  - Total Liabilities 
+  - Total Operating Expenses     
+
+categorical_columns:
+  - _id
+  - company_name
+  - Company Status
+
+drop_columns: 
+  - _id
+  - company_name
+  - Company Status
+
+# for data transformation for Standard Scalar
+num_features:                      
+  - Current assets 
+  - Cost of goods sold 
+  - Depreciation and amortization 
+  - EBDITDA 
+  - Inventory 
+  - Net Income 
+  - Total Receivable 
+  - Market Value 
+  - Net Sales 
+  - Total Assets 
+  - Total Long-term Debt 
+  - EBIT 
+  - Gross Profit 
+  - Total Current Liabilitie 
+  - Retained Earnings 
+  - Total Revenue 
+  - Total Liabilities 
+  - Total Operating Expenses     
+
+# for min max Scalar 
+# mm_columns:
+  
