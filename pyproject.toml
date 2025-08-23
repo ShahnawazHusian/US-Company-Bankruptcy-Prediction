@@ -1,0 +1,11 @@
+[project]
+name = "src"
+version = "0.0.1"
+description = "An  US-Company-Bankruptcy-Prediction project for productionizing models"
+authors = [{name = "Shahnawaz Husain", email = "husainshahnawaz15@gmail.com"}]
+
+[tool.setuptools]
+packages = {find = {}}
+
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}
