@@ -18,4 +18,11 @@ python-multipart
 uvicorn
 jinja2
 imblearn
+xgboost
+optuna
+optuna-integration[xgboost]
+nbformat>=4.2.0
+notebook 
+ipython 
+ipykernel
 -e .
