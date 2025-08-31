@@ -4,6 +4,7 @@ from datetime import date
 # For MongoDB connection
 DATABASE_NAME = "US-Company-Bankruptcy"
 COLLECTION_NAME = "US-Company-Bankruptcy-Data" 
+COLLECTION_NAME2 = "MLmodel"
 MONGODB_URL_KEY = "MONGODB_URL"
 
 PIPELINE_NAME: str = ""
@@ -20,10 +21,6 @@ TRAIN_FILE_NAME: str = "train.csv"
 TEST_FILE_NAME: str = "test.csv"
 SCHEMA_FILE_PATH = os.path.join("config", "schema.yaml")
 
-
-AWS_ACCESS_KEY_ID_ENV_KEY = "AWS_ACCESS_KEY_ID"
-AWS_SECRET_ACCESS_KEY_ENV_KEY = "AWS_SECRET_ACCESS_KEY"
-REGION_NAME = "us-east-1"
 
 
 """
@@ -67,8 +64,6 @@ MIN_SAMPLES_SPLIT_RANDOM_STATE: int = 101
 MODEL Evaluation related constants
 """
 MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
-MODEL_BUCKET_NAME = "my-model-mlopsproj"
-MODEL_PUSHER_S3_KEY = "model-registry"
 
 
 APP_HOST = "0.0.0.0"
