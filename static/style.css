@@ -1,0 +1,72 @@
+/* Base */
+body {
+    font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f4f6f9;
+    color: #212529;
+}
+
+/* Card */
+.card {
+    border-radius: 16px;
+    border: none;
+}
+
+/* Labels */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1px solid #d0d7de;
+    transition: all 0.25s ease;
+}
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.15);
+}
+
+/* Buttons */
+.btn-lg {
+    padding: 12px 32px;
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Gradient Buttons */
+.btn-gradient-primary {
+    background: linear-gradient(90deg, #0d6efd, #0a58ca);
+    color: #fff;
+    border: none;
+}
+.btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #0b5ed7, #0a53be);
+}
+
+.btn-gradient-success {
+    background: linear-gradient(90deg, #198754, #157347);
+    color: #fff;
+    border: none;
+}
+.btn-gradient-success:hover {
+    background: linear-gradient(90deg, #157347, #146c43);
+}
+
+/* Alerts */
+.alert-info {
+    background: #e7f1ff;
+    border: 1px solid #b6d4fe;
+    color: #084298;
+    font-weight: 600;
+    padding: 18px;
+}

@@ -64,6 +64,6 @@ class ModelPusherConfig:
     mongo_model_key_path: str = MODEL_FILE_NAME
 
 @dataclass
-class VehiclePredictorConfig:
+class BankruptcyPredictorConfig:
     mongo_model_file_path: str = MODEL_FILE_NAME
-    model_bucket_name: str = MODEL_BUCKET_NAME
+    model_collection_name: str = COLLECTION_NAME2

@@ -182,57 +182,74 @@ class MongoModelService:
             logging.error(error_msg)
             raise Exception(error_msg)
         
-    # def save_model(self, model, model_name: str):
-    #     """
-    #     Save a serialized model into the model collection.
-    #     """
-    #     try:
-    #         model_obj = pickle.dumps(model)
-
-    #         # replace old model if exists
-    #         self.model_collection.delete_many({"model_name": model_name})
-
-    #         result = self.model_collection.insert_one({
-        #         "model_name": model_name,
-        #         "model_blob": model_obj
-        #     })
-
-        #     logging.info(f"Model '{model_name}' saved with ID {result.inserted_id}")
-        #     return result.inserted_id
-        # except Exception as e:
-        #     raise MyException(e, sys) from e
-
-    # def load_model(self, model_name: str):
-    #     """
-    #     Load a serialized model from MongoDB GridFS.
-    #     """
-    #     try:
-    #         file_object = self.fs.find_one({"filename": model_name})
-    #         if not file_object:
-    #             raise FileNotFoundError(f"Model '{model_name}' not found in MongoDB GridFS")
-
-    #         model_obj = file_object.read()
-    #         model = pickle.loads(model_obj)
-    #         logging.info(f"Model '{model_name}' loaded from MongoDB GridFS")
-    #         return model
-
-    #     except Exception as e:
-    #         raise MyException(e, sys) from e
-        
     def load_model(self, model_name: str):
         """
-        Load a serialized model from the model collection.
+        Load a serialized model from MongoDB collection.
         """
         try:
-            record = self.model_collection.find_one({"model_name": model_name})
-            if not record:
-                raise FileNotFoundError(f"Model '{model_name}' not found in MongoDB collection")
+            if not self.test_connection():
+                raise Exception("MongoDB connection test failed before loading model")
+            
+            print(f"📥 Loading model '{model_name}' from MongoDB...")
+            doc = self.collection.find_one({"name": model_name})
 
-            model = pickle.loads(record["model_blob"])
-            logging.info(f"Model '{model_name}' loaded from MongoDB collection")
+            if not doc:
+                raise Exception(f"Model '{model_name}' not found in MongoDB")
+
+            if "model" not in doc:
+                raise Exception(f"No 'model' field found in document for '{model_name}'")
+
+            model_bin = doc["model"]
+
+            # If it's pymongo.binary.Binary → convert to bytes
+            if isinstance(model_bin, Binary):
+                model_bin = bytes(model_bin)
+
+            # Deserialize the ML model
+            model = pickle.loads(model_bin)
+            print(f"✅ Model '{model_name}' loaded successfully ({type(model)})")
             return model
+
         except Exception as e:
-            raise MyException(e, sys) from e
+            error_msg = f"Failed to load model '{model_name}': {str(e)}"
+            logging.error(error_msg)
+            raise Exception(error_msg)
+
+    
+        
+    # def load_model(self,model_name):
+    #     record = self.collection.find_one({"name": model_name})
+    #     if not record:
+    #         raise FileNotFoundError(f"Model '{model_name}' not found in MongoDB")
+
+    #     model_binary = record["model"]
+
+    #     # Ensure we have bytes
+    #     if isinstance(model_binary, Binary):
+    #         model_bytes = bytes(model_binary)
+    #     else:
+    #         model_bytes = model_binary
+
+    #     # ✅ Unpickle to actual sklearn model
+    #     model = pickle.loads(model_bytes)
+
+    #     if not hasattr(model, "predict"):
+    #         raise TypeError(f"Loaded object is {type(model)}, not a ML model")
+        
+    # def load_model(self, model_name: str):
+    #     """
+    #     Load a serialized model from the model collection.
+    #     """
+    #     try:
+    #         record = self.collection.find_one({"model_name": model_name})
+    #         if not record:
+    #             raise FileNotFoundError(f"Model '{model_name}' not found in MongoDB collection")
+
+    #         model = pickle.loads(record["model_blob"])
+    #         logging.info(f"Model '{model_name}' loaded from MongoDB collection")
+    #         return model
+    #     except Exception as e:
+    #         raise MyException(e, sys) from e
     
     def model_available(self, model_name: str) -> bool:
         """
@@ -250,23 +267,23 @@ class MongoModelService:
         except Exception as e:
             raise MyException(e, sys) from e
 
-    def insert_data(self, record: dict):
-        """
-        Insert a data record into the data collection.
-        """
-        try:
-            result = self.data_collection.insert_one(record)
-            logging.info(f"Data inserted with ID {result.inserted_id}")
-            return result.inserted_id
-        except Exception as e:
-            raise MyException(e, sys) from e
+    # def insert_data(self, record: dict):
+    #     """
+    #     Insert a data record into the data collection.
+    #     """
+    #     try:
+    #         result = self.data_collection.insert_one(record)
+    #         logging.info(f"Data inserted with ID {result.inserted_id}")
+    #         return result.inserted_id
+    #     except Exception as e:
+    #         raise MyException(e, sys) from e
 
-    def fetch_data(self, query: dict = {}):
-        """
-        Fetch data records from the data collection.
-        """
-        try:
-            records = list(self.data_collection.find(query))
-            return records
-        except Exception as e:
-            raise MyException(e, sys) from e
+    # def fetch_data(self, query: dict = {}):
+    #     """
+    #     Fetch data records from the data collection.
+    #     """
+    #     try:
+    #         records = list(self.data_collection.find(query))
+    #         return records
+    #     except Exception as e:
+    #         raise MyException(e, sys) from e
