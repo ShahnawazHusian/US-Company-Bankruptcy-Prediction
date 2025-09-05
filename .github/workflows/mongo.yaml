@@ -24,15 +24,24 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
+    - name: Debug secret
+      run: |
+        if [ -z "$MONGODB_URL" ]; then
+          echo "❌ MONGODB_URL is not set"
+        else
+          echo "✅ MONGODB_URL is set"
+        fi
+
+
     - name: Debug env
       run: |
-        echo "MONGODB_URL_KEY=$MONGODB_URL_KEY" | sed 's/./& /g'
+        echo "MONGODB_URL=$MONGODB_URL" | sed 's/./& /g'
       env:
-        MONGODB_URL_KEY: ${{ secrets.MONGODB_URL_KEY }}
+        MONGODB_URL: ${{ secrets.MONGODB_URL }}
 
     - name: Run tests
       env:
-        MONGODB_URL_KEY: ${{ secrets.MONGODB_URL_KEY }} 
+        MONGODB_URL: ${{ secrets.MONGODB_URL }} 
       run: |
         pytest _test.py
 
