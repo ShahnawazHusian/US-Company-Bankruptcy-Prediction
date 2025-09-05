@@ -1,4 +1,4 @@
-name: US_bankruptcy Workflow
+name: US_bankruptcy_Workflow
 
 on:
   push:
@@ -36,17 +36,9 @@ jobs:
         }
         pytest _test.py
 
-    # - name: Debug env
-    #   run: |
-    #     echo "MONGODB_URL=$MONGODB_URL" | sed 's/./& /g'
-    #   env:
-    #     MONGODB_URL: ${{ secrets.MONGODB_URL }}
-
-    # - name: Run tests
-    #   env:
-    #     MONGODB_URL: ${{ secrets.MONGODB_URL }} 
-    #   run: |
-    #     pytest _test.py
+    - name: Run Docker Image to serve users
+      run: |
+        docker run -d -e MONGODB_URL="${{ secrets.MONGODB_URL }}" -p 5000:5000 :latest
 
     
 
