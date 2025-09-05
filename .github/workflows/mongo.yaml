@@ -38,7 +38,10 @@ jobs:
 
     - name: Run Docker Image to serve users
       run: |
-        docker run -d -e MONGODB_URL="${{ secrets.MONGODB_URL }}" -p 5000:5000 :latest
+        docker run -d \
+          -e MONGODB_URL="${{ secrets.MONGODB_URL }}" \
+          -p 5000:5000 \
+          shahnawazhusain/us-bnackruptcy-data-prediction:latest
 
     
 
