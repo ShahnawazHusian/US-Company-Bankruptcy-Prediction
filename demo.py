@@ -10,4 +10,4 @@ mongo_url = os.getenv(MONGODB_URL_KEY)
 if not mongo_url:
     raise Exception(f"Environment variable '{MONGODB_URL_KEY}' is not set.")
 else:
-    print("connected")
+    print(mongo_url)
