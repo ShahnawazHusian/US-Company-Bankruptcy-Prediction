@@ -43,12 +43,12 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Pull Docker Image
-      run: docker pull shahnawazhusain/us-bankruptcy-data-prediction
+      run: docker pull shahnawazhusain/us-bnackruptcy-data-prediction:latest
       shell: powershell
 
     - name: Run Docker Image to serve users
       run: |
-        docker run -d -e MONGODB_URL="${{ secrets.MONGODB_URL }}" -p 5000:5000 shahnawazhusain/us-bnackruptcy-data-prediction
+        docker run -d -e MONGODB_URL="${{ secrets.MONGODB_URL }}" -p 5000:5000 shahnawazhusain/us-bnackruptcy-data-prediction:latest
       shell: powershell
     
 
