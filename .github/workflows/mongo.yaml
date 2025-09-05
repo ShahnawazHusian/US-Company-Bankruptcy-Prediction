@@ -26,13 +26,13 @@ jobs:
     
     - name: Debug env
       run: |
-        echo "MONGODB_URL=$MONGODB_URL" | sed 's/./& /g'
+        echo "MONGODB_URL_KEY=$MONGODB_URL_KEY" | sed 's/./& /g'
       env:
-        MONGODB_URL_KEY: ${{ secrets.MONGODB_URL }}
+        MONGODB_URL_KEY: ${{ secrets.MONGODB_URL_KEY }}
 
     - name: Run tests
       env:
-        MONGODB_URL_KEY: ${{ secrets.MONGODB_URL }} 
+        MONGODB_URL_KEY: ${{ secrets.MONGODB_URL_KEY }} 
       run: |
         pytest _test.py
 
