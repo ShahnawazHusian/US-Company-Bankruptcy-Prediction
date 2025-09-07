@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -46,11 +46,11 @@ jobs:
 
     - name: Pull Docker Image
       run: docker pull shahnawazhusain/us-bnackruptcy-data-prediction:latest
-      shell: powershell
+      
 
     - name: Run Docker Image to serve users
       run: |
-        docker run shahnawazhusain/us-bnackruptcy-data-prediction:latest
-      shell: powershell
+        docker run -d -e MONGODB_URL="${{ secrets.MONGODB_URL }}" -p 5000:5000 shahnawazhusain/us-bnackruptcy-data-prediction:latest
+    
     
 
