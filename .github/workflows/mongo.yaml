@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: window-latest
 
     steps:
     - name: Checkout code
@@ -24,27 +24,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Check MongoDB secret
-      run: |
-        if [ -z "$MONGODB_URL" ]; then
-          echo "❌ MONGODB_URL is not set"
-          exit 1
-        else
-          echo "✅ MONGODB_URL is set"
-        fi
+    # - name: Check MongoDB secret
+    #   run: |
+    #     if [ -z "$MONGODB_URL" ]; then
+    #       echo "❌ MONGODB_URL is not set"
+    #       exit 1
+    #     else
+    #       echo "✅ MONGODB_URL is set"
+    #     fi
 
     
-    # - name: Run tests
-    #   env:
-    #     MONGODB_URL: ${{ secrets.MONGODB_URL }}
-    #   run: |
-    #     if (-not $env:MONGODB_URL) {
-    #       Write-Host "❌ MONGODB_URL is not set"
-    #       exit 1
-    #     } else {
-    #       Write-Host "✅ MONGODB_URL is set"
-    #     }
-    #     pytest _test.py
+    - name: Run tests
+      env:
+        MONGODB_URL: ${{ secrets.MONGODB_URL }}
+      run: |
+        if (-not $env:MONGODB_URL) {
+          Write-Host "❌ MONGODB_URL is not set"
+          exit 1
+        } else {
+          Write-Host "✅ MONGODB_URL is set"
+        }
+        pytest _test.py
 
       # this docker pull request will work with ubunt-latest
 
