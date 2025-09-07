@@ -36,6 +36,8 @@ jobs:
         }
         pytest _test.py
 
+      # this docker pull request will work with ubunt-latest
+
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
@@ -48,7 +50,7 @@ jobs:
 
     - name: Run Docker Image to serve users
       run: |
-        docker run -d -e MONGODB_URL="${{ secrets.MONGODB_URL }}" -p 5000:5000 shahnawazhusain/us-bnackruptcy-data-prediction:latest
+        docker run shahnawazhusain/us-bnackruptcy-data-prediction:latest
       shell: powershell
     
 
