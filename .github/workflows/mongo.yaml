@@ -28,12 +28,8 @@ jobs:
       env:
         MONGODB_URL: ${{ secrets.MONGODB_URL }}
       run: |
-        if (-not $env:MONGODB_URL) {
-          Write-Host "❌ MONGODB_URL is not set"
-          exit 1
-        } else {
-          Write-Host "✅ MONGODB_URL is set"
-        }
+        if (-not $env:MONGODB_URL) {Write-Host "❌ MONGODB_URL is not set"exit 1} 
+        else {Write-Host "✅ MONGODB_URL is set"}
         pytest _test.py
 
       # this docker pull request will work with ubunt-latest
